@@ -1,0 +1,445 @@
+
+
+
+void myLine (int x1, int y1, int x2, int y2)
+{
+  // insert your code here to draw a line from (x1, y1) to (x2, y2) 
+  // using only calls to point().
+  
+  // your code should implement the Midpoint algorithm
+  //int dE, dNE, x, y, d;
+  int dy = y2 - y1; // difference between the y points
+  int dx = x2 - x1; // difference between the x points  
+  // int compareNum;
+  // dE = 2*dy;
+  // dNE = 2*(dy - dx);
+  // d = dE - dx;
+  // if (x1 >= x2) {
+  //   x = x2;
+  //   y = y2;
+  //   compareNum_x = x1;
+  //   compareNum_y = y1;
+  // } else {
+  //   x = x1;
+  //   y = y1;
+  //   compareNum_x = x2;
+  //   compareNum_y = y2;
+  // }
+  // for (;x <= compareNum_x || y <= compareNum_y;) {
+  //   point(x, y);
+
+  //   if (d <= 0) {
+  //     if () {
+
+  //     }
+  //     d += dE;
+  //   } else {
+  //     ++y;
+  //     d += dNE;
+  //   }
+  // }
+  if (abs(dx)>=abs(dy)) { //****zone 0,3,4,7*******
+    if (dx >= 0 && dy >= 0) { // zone 0
+        int d = 2*dy - dx;
+        int dE = 2*dx;
+        int dNE = 2*dy - 2*dx;
+        int x=x1;
+        int y=y1;
+
+        point(x, y);
+        while (x<x2) {
+          ++x;
+          if (d>0) { //dNE
+              ++y;
+              d += dNE;
+          } else { //dE
+              d += dE;
+          }
+          point(x, y);
+        }
+    } else if(dx >= 0 && dy < 0) { //zone 7
+        int d = 2*dy + dx;
+        int dE = 2*dy;
+        int dSE = 2*dy + 2*dx;
+        int x=x1;
+        int y=y1;
+        point(x, y);
+        while (x<x2) {
+          ++x;
+          if (d>0) { //dE
+              d += dE;
+          } else { //dSE
+              ++y;
+              d += dSE;
+          }
+          point(x, y);
+        }
+    }else if(dx<0 && dy>=0){ //zone 3
+        int d = -2*dy - dx;
+        int dW = -2*dy;
+        int dNW = -2*dy - 2*dx;
+        int x=x1;
+        int y=y1; 
+        point(x, y);
+        while (x>x2) {
+          ++x;
+          if (d>0) { //dW
+              d += dW;
+          } else { //dNW
+              ++y;
+              d += dNW;
+          }
+          point(x, y);
+        }
+    }else { //zone 4
+        int d = -2*dy + dx;
+        int dW = -2*dy;
+        int dNW = -2*dy + 2*dx;
+        int x=x1;
+        int y=y1; 
+        point(x, y);
+        while (x>x2) {
+          ++x;
+          if (d>0) { //dW
+              d += dW;
+          } else { //dNW
+              ++y;
+              d += dNW;
+          }
+          point(x, y);
+        }
+    }
+  }else{ //*******zone 1,2,5,6***********
+    if(dx>=0 && dy>=0){ //zone1
+        int d = dy - 2*dx;
+        int dN = -2*dx;
+        int dNE = 2*dy - 2*dx;
+        int x=x1;
+        int y=y1;
+
+        point(x, y);
+        while (y<y2) {
+          ++y;
+          if(d>0) { //dN
+              d += dN;
+          } else { //dNE
+              ++x;
+              d += dNE;
+          }
+          point(x, y);
+        }
+    }else if(dx>=0 && dy<0) { //zone 6
+        int d = dy + 2*dx;
+        int dS = 2*dx;
+        int dSE = 2*dy + 2*dx;
+        int x=x1;
+        int y=y1;
+
+        point(x, y);
+        while (y>y2) {
+          ++y;
+          if (d>0) { //dSE
+              ++x; 
+              d += dSE;
+          } else { //dS
+              d += dS;
+          }
+          point(x ,y);
+        }
+    }else if(dx<0 && dy>=0){ //zone 2
+        int d = -dy - 2*dx;
+        int dN = -2*dx;
+        int dNW = -2*dy - 2*dx;
+        int x=x1;
+        int y=y1;
+
+        point(x, y);
+        while (y<y2) {
+          ++y;
+          if (d>0) { //dN
+              d += dN;
+          } else { //dNW
+              ++x;
+              d += dNW;
+          }
+          point(x, y);
+        }
+    }else{ //zone 5
+        int d = -dy + 2*dx;
+        int dS = 2*dx;
+        int dSW = -2*dy + 2*dx;
+        int x=x1;
+        int y=y1;
+
+        point(x, y);
+        while(y>y2){
+          ++y;
+          if (d>0) { //dS
+              d += dS;
+          } else { //dSW
+              ++x;
+              d += dSW;
+          }
+          point(x, y);
+        }
+    }
+}
+
+ void example(){
+   if (abs(dx)>=abs(dy)) { //****zone 0,3,4,7*******
+    if (dx >= 0 && dy >= 0) { // zone 0
+        int d = 2*dy - dx;
+        int dE = 2*dx;
+        int dNE = 2*dy - 2*dx;
+        int x=x0;
+        int y=y0;
+
+        point(x, y);
+        while (x<x1) { //<>//
+          ++x;
+          if (d>0) { //dNE
+              ++y;
+              d += dNE;
+          } else { //dE
+              d += dE;
+          }
+          point(x, y);
+        }
+    } else if(dx >= 0 && dy < 0) { //zone 7
+        int d = 2*dy + dx;
+        int dE = 2*dy;
+        int dSE = 2*dy + 2*dx;
+        int x=x0;
+        int y=y0;
+        point(x, y);
+        while (x<x1) {
+          ++x;
+          if (d>0) { //dE
+              d += dE;
+          } else { //dSE
+              ++y;
+              d += dSE;
+          }
+          point(x, y);
+        }
+    }else if(dx<0 && dy>=0){ //zone 3
+        int d = -2*dy - dx;
+        int dW = -2*dy;
+        int dNW = -2*dy - 2*dx;
+        int x=x0;
+        int y=y0; 
+        point(x, y);
+        while (x>x1) {
+          ++x;
+          if (d>0) { //dW
+              d += dW;
+          } else { //dNW
+              ++y;
+              d += dNW;
+          }
+          point(x, y);
+        }
+    }else { //zone 4
+        int d = -2*dy + dx;
+        int dW = -2*dy;
+        int dNW = -2*dy + 2*dx;
+        int x=x0;
+        int y=y0; 
+        point(x, y);
+        while (x>x1) {
+          ++x;
+          if (d>0) { //dW
+              d += dW;
+          } else { //dNW
+              ++y;
+              d += dNW;
+          }
+          point(x, y);
+        }
+    }
+  }else{ //*******zone 1,2,5,6***********
+    if(dx>=0 && dy>=0){ //zone1
+        int d = dy - 2*dx;
+        int dN = -2*dx;
+        int dNE = 2*dy - 2*dx;
+        int x=x0;
+        int y=y0;
+
+        point(x, y);
+        while (y<y1) {
+          ++y;
+          if(d>0) { //dN
+              d += dN;
+          } else { //dNE
+              ++x;
+              d += dNE;
+          }
+          point(x, y);
+        }
+    }else if(dx>=0 && dy<0) { //zone 6
+        int d = dy + 2*dx;
+        int dS = 2*dx;
+        int dSE = 2*dy + 2*dx;
+        int x=x0;
+        int y=y0;
+
+        point(x, y);
+        while (y>y1) {
+          ++y;
+          if(d>0){ //dSE
+              ++x; 
+              d += dSE;
+          }else{ //dS
+              d += dS;
+          }
+          point(x ,y);
+        }
+    }else if(dx<0 && dy>=0){ //zone 2
+        int d = -dy - 2*dx;
+        int dN = -2*dx;
+        int dNW = -2*dy - 2*dx;
+        int x=x0;
+        int y=y0;
+
+        point(x, y);
+        while (y<y1) {
+          ++y;
+          if(d>0){ //dN
+              d += dN;
+          }else{ //dNW
+              ++x;
+              d += dNW;
+          }
+          point(x, y);
+        }
+    }else{ //zone 5
+        int d = -dy + 2*dx;
+        int dS = 2*dx;
+        int dSW = -2*dy + 2*dx;
+        int x=x0;
+        int y=y0;
+
+        point(x, y);
+        while(y>y1){
+          ++y;
+          if (d>0) { //dS
+              d += dS;
+          }else{ //dSW
+              ++x;
+              d += dSW;
+          }
+          point(x, y);
+        }
+    }
+  }
+}
+
+
+void myTriangle (int x0, int y0, int x1, int y1, int x2, int y2)
+{
+  // insert your code here to draw a triangle with vertices (x0, y0), (x1, y1) and (x2, y2) 
+  // using only calls to point().
+  
+  // your code should implement the the algorithm presented in the video
+}
+
+
+
+// --------------------------------------------------------------------------------------------
+//
+//  Do not edit below this lne
+//
+// --------------------------------------------------------------------------------------------
+
+boolean doMine = true;
+int scene = 1;
+color backgroundColor = color (150, 150, 150);
+
+void setup () 
+{
+  size (500, 500);
+  background (backgroundColor);
+}
+
+void draw ()
+{
+  fill (0,0,0);
+    if (doMine) text ("my solution", 20, 475);
+    else text ("reference", 20, 475);
+    
+  if (scene == 1) doLines();
+  if (scene == 2) doHouse();
+  
+}
+
+void doHouse()
+{
+  if (!doMine) {
+    fill (255, 0, 0);
+    stroke (255,0,0);
+    triangle (200, 300, 300, 200, 200, 200);
+    triangle (300, 300, 300, 200, 200, 300);
+    fill (0, 0, 255);
+    stroke (0,0,255);
+    triangle (200,200, 300, 200, 250, 150);
+    stroke (0,255,0);
+    fill (0,255,0);
+    triangle (250, 300, 275, 300, 250, 250);
+    triangle (275, 300, 275, 250, 250, 250);
+  }
+  else {
+    fill (128, 0, 0);
+    stroke (128,0,0);
+    myTriangle (200, 300, 300, 200, 200, 200);
+    myTriangle (300, 300, 300, 200, 200, 300);
+    fill (0, 0, 128);
+    stroke (0,0,128);
+    myTriangle (200,200, 300, 200, 250, 150);
+    stroke (0,128,0);
+    fill (0,128,0);
+    myTriangle (250, 300, 275, 300, 250, 250);
+    myTriangle (275, 300, 275, 250, 250, 250);
+  }
+}
+
+void doLines()
+{
+  if  (!doMine) {
+    stroke (255, 255, 255);
+    line (50, 250, 450, 250);
+    line (250, 50, 250, 450);
+    line (50, 450, 450, 50);
+    line (50, 50, 450, 450);
+  }
+  else {
+    stroke (0, 0, 0);
+    myLine (50, 250, 450, 250); // works
+    //myLine (250, 50, 250, 450);
+    myLine (50, 450, 450, 50);
+    //line(250, 50, 250, 450);
+    myLine (50, 50, 450, 450); // works
+  }
+}
+
+void keyPressed()
+{
+  if (key == '1') 
+  {
+    background (backgroundColor);
+    scene = 1;
+  }
+  
+  if (key == '2') 
+  {
+    background (backgroundColor);
+    scene = 2;
+  }
+  
+  if (key == 'm') 
+  {
+    background (backgroundColor);
+    doMine = !doMine;
+  }
+  
+  if (key == 'q') exit();
+}
