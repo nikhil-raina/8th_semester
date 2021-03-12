@@ -1,5 +1,16 @@
 
 
+// Finds the min number
+int find_min(int num1, int num2, int num3) {
+  return Math.min(num3, Math.min(num1, num2));
+}
+
+// Finds the max number
+int find_max(int num1, int num2, int num3) {
+  return Math.max(num3, Math.max(num1, num2));
+}
+
+
 
 void myColorTriangle (int x0, int y0, int r0, int g0, int b0, 
                       int x1, int y1, int r1, int g1, int b1,
@@ -14,6 +25,35 @@ void myColorTriangle (int x0, int y0, int r0, int g0, int b0,
   // This function has the following signature
   
   // your code should be an extension of the myTrangle function from Assignment 2.
+  float side_1, side_2, side_3, area_triangle, lambda_1, lambda_2, lambda_3;
+  int max_x = find_max(x0, x1, x2);
+  int max_y = find_max(y0, y1, y2);
+  int min_x = find_min(x0, x1, x2);  // starting point of "floor" on one side
+  int min_y = find_min(y0, y1, y2);  // starting point of "floor" on the other side
+  
+  // finds the area of triangle for comparison
+  area_triangle = (x0 * (y1 - y2) + x1 * (y2 - y0) + x2 * (y0 - y1)) / 2.0; // V0
+  
+  for (int x_coor = min_x; x_coor <= max_x; x_coor++) {  // builds the x-coordinates till the top
+    for (int y_coor = min_y; y_coor <= max_y; y_coor++) {  // builds the y-coordinates till the top
+      
+      // finds the "relative area" within the triangle
+      side_1 = (x_coor * (y2 - y0) + x2 * (y0 - y_coor) + x0 * (y_coor - y2)) / 2.0;
+      side_2 = (x_coor * (y1 - y2) + x1 * (y2 - y_coor) + x2 * (y_coor - y1)) / 2.0;
+      side_3 = (x_coor * (y0 - y1) + x0 * (y1 - y_coor) + x1 * (y_coor - y0)) / 2.0;
+      
+      lambda_1 = side_1 / area_triangle;
+      lambda_2 = side_2 / area_triangle;
+      lambda_3 = side_3 / area_triangle;
+      
+      // if the total area qualifies, then plot that point on the screen
+      // This implies that the pixel is within the area of the actual triangle entered
+      if (Math.abs(side_1) + Math.abs(side_2) + Math.abs(side_3) == Math.abs(area_triangle)) {
+        drawColorPoint(x_coor, y_coor, int(lambda_1 * 255), int(lambda_2 * 255), int(lambda_3 * 255));
+      }
+    }
+  }
+
 }
 
 
@@ -30,7 +70,9 @@ PMatrix2D transformTheHouse()
   // Also recall, in Processing +y is down (in transformation game +y is up)
   // in processing: +rotation is clockwise (and in radians)....in transformation game +rotation is counter-clockwise (and in degrees).
   
- 
+  retval.preApply(1, 0, 0, 0, 1, -25);
+  retval.preApply(cos(10 * PI/ 180), sin(10 * PI / 180), 0, -sin(10 * PI / 180), cos(10 * PI / 180), 0);
+  
   // return the result
   return retval;
 }
