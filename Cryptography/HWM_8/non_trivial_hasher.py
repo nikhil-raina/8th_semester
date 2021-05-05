@@ -16,7 +16,7 @@ def make32(x):
     return x
 
 
-def string_hash(v):
+def hash(v):
     """
     hash of string
     """
@@ -47,12 +47,11 @@ def tester(collision_limit):
             print('-----------------------')
             break
         binary_num = bin(input)[2:]
-        hex_result = string_hash(binary_num)
+        hex_result = hash(binary_num)
         if hex_result in hex_values:
             collisions += 1
             print('Collision Occurred [', collisions, ']')
-            print('Input 1 = ', hex_values[hex_result], ', with Binary: ', bin(
-                hex_values[hex_result])[2:])
+            print('Input 1 = ', hex_values[hex_result], ', with Binary: ', bin(hex_values[hex_result])[2:])
             print('Input 2 = ', input, ', with Binary: ', bin(input)[2:])
             print('32-bit Hash:', hex_result)
             print()
