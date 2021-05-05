@@ -4,3 +4,6 @@
 
 *.zip
 *.jar
+
+*.DS_STORE
+*.mp4
