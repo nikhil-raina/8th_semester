@@ -29,8 +29,8 @@ def hash(v):
             x = make32((x*m) ^ ord(c))
         x ^= len(v)
         if x == -1:
-            x = hex(10)
-        return hex(x & ((1 << 32) - 1))[2:]
+            x = -2
+        return hex(abs(x))[2:]
 
 
 def tester(collision_limit):
