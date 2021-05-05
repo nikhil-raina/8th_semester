@@ -21,7 +21,7 @@ def hash(v):
     hash of string
     """
     if v == '':
-        return 0
+        return hex(10)
     else:
         x = ord(v[0])
         m = 10
@@ -29,7 +29,7 @@ def hash(v):
             x = make32((x*m) ^ ord(c))
         x ^= len(v)
         if x == -1:
-            x = -2
+            x = hex(10)
         return hex(x & ((1 << 32) - 1))[2:]
 
 
