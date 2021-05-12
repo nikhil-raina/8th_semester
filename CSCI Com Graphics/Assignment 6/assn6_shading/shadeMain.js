@@ -176,6 +176,8 @@ function setUpCamera(program) {
 
     // set up your projection
     let projMatrix = glMatrix.mat4.create();
+    // Orthogonal View
+    // glMatrix.mat4.ortho(projMatrix, -5, 5, -5, 5, 1, 15);
     glMatrix.mat4.perspective(projMatrix, radians(90), 1.0, 1, 10);
     gl.uniformMatrix4fv (program.uProjT, false, projMatrix);
 
